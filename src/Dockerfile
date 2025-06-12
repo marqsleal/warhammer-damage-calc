@@ -2,9 +2,11 @@ FROM python:3.12.3
 
 WORKDIR /app
 
-COPY requirements_docker.txt ./
+COPY requirements.in ./
 
-RUN pip install --no-cache-dir -r requirements_docker.txt
+RUN pip install --no-cache-dir pip-tools && \
+    pip-compile requirements.in --output-file requirements.txt && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 

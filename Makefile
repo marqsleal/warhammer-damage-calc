@@ -38,8 +38,8 @@ api_run:
 
 .PHONY: api_docker_requirements
 api_docker_requirements:
-	pipreqs src --force --savepath src/requirements_docker.txt
-	echo "uvicorn==0.34.3" >> src/requirements_docker.txt
+	pipreqs src --force --savepath src/requirements.in
+	echo "uvicorn==0.34.3" >> src/requirements.in
 
 
 .PHONY: api_docker_build
