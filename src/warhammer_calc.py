@@ -65,7 +65,7 @@ class WarHammerCalc:
             skill = 1
         p_success = (DICE_MAX - skill) / DICE_SIDES
         if reroll_value == 0:
-            return p_success            
+            return p_success
         p_reroll = reroll_value / DICE_SIDES
         return p_success + p_reroll * p_success
 
