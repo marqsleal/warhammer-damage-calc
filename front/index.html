@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Warhammer Damage Calc</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1b1b1b;
+            color: #e0e0e0;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f2c94c;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .box {
+            background: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            min-width: 300px;
+            max-width: 400px;
+            flex: 1 1 300px;
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #c0392b;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        label {
+            flex: 1;
+            font-size: 0.95em;
+            color: #ecf0f1;
+            margin-right: 10px;
+        }
+
+        input[type="number"] {
+            width: 70px;
+            padding: 6px;
+            background-color: #111;
+            color: #fff;
+            border: 1px solid #555;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+
+        button {
+            width: 100%;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #1e8449;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 1.1em;
+            color: #f2c94c;
+        }
+
+        pre {
+            background-color: #1a1a1a;
+            color: #8bc34a;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 6px;
+            font-family: Consolas, monospace;
+            font-size: 0.95em;
+            white-space: pre-wrap;
+        }
+
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            label {
+                margin-bottom: 4px;
+            }
+
+            input[type="number"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Warhammer 40k Damage Calculator</h1>
+    <div class="container">
+        <form id="calc-form" class="box">
+            <fieldset>
+                <legend>Attacker Unit</legend>
+                <div class="form-group"><label for="ATTACK">[A] Attacks:</label><input name="ATTACK" id="ATTACK" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="SKILL">[S+] Skill:</label><input name="SKILL" id="SKILL" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="STRENGTH">[S] Strength:</label><input name="STRENGTH" id="STRENGTH" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="ARMOR_PENETRATION">[AP] Armor Pen:</label><input name="ARMOR_PENETRATION" id="ARMOR_PENETRATION" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="FLAT_DAMAGE">Flat Damage:</label><input name="FLAT_DAMAGE" id="FLAT_DAMAGE" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="D3_DAMAGE">D3 Damage:</label><input name="D3_DAMAGE" id="D3_DAMAGE" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="D6_DAMAGE">D6 Damage:</label><input name="D6_DAMAGE" id="D6_DAMAGE" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="BLAST">Blast (0 or 1):</label><input name="BLAST" id="BLAST" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="HEAVY">Heavy (0 or 1):</label><input name="HEAVY" id="HEAVY" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="LETHAL_HITS">Lethal Hits (0 or 1):</label><input name="LETHAL_HITS" id="LETHAL_HITS" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="SUSTAINED_HITS">Sustained Hits (0 or 1):</label><input name="SUSTAINED_HITS" id="SUSTAINED_HITS" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="TWIN_LINKED">Twin-Linked (0 or 1):</label><input name="TWIN_LINKED" id="TWIN_LINKED" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="REROLL_TO_HIT">Reroll To Hit (0 or 1):</label><input name="REROLL_TO_HIT" id="REROLL_TO_HIT" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="REROLL_TO_WOUND">Reroll To Wound (0 or 1):</label><input name="REROLL_TO_WOUND" id="REROLL_TO_WOUND" type="number" value="0" autocomplete="off"></div>
+            </fieldset>
+        </form>
+        <div class="box">
+            <fieldset>
+                <legend>Defender Unit</legend>
+                <div class="form-group"><label for="TOUGHNESS">[T] Toughness:</label><input name="TOUGHNESS" id="TOUGHNESS" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="ARMOR_SAVE">[Sv+] Armor Save:</label><input name="ARMOR_SAVE" id="ARMOR_SAVE" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="N_MODELS">Number of Models:</label><input name="N_MODELS" id="N_MODELS" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="INVULNERABLE_SAVE">Invulnerable Save:</label><input name="INVULNERABLE_SAVE" id="INVULNERABLE_SAVE" type="number" value="0" autocomplete="off"></div>
+                <div class="form-group"><label for="FEEL_NO_PAIN">Feel No Pain:</label><input name="FEEL_NO_PAIN" id="FEEL_NO_PAIN" type="number" value="0" autocomplete="off"></div>
+                <button type="submit">ROLL</button>
+            </fieldset>
+        </div>
+        <div class="box">
+            <h3>Result</h3>
+            <pre id="result">Fill in the fields and click "ROLL".</pre>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calc-form').onsubmit = async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const attacker = {};
+            const defender = {};
+
+            for (const el of form.elements) {
+                if (!el.name) continue;
+                if (["ATTACK","SKILL","STRENGTH","ARMOR_PENETRATION","FLAT_DAMAGE","D3_DAMAGE","D6_DAMAGE","BLAST","HEAVY","LETHAL_HITS","SUSTAINED_HITS","TWIN_LINKED","REROLL_TO_HIT","REROLL_TO_WOUND"].includes(el.name)) {
+                    attacker[el.name] = Number(el.value);
+                } else if (["TOUGHNESS","ARMOR_SAVE","N_MODELS","INVULNERABLE_SAVE","FEEL_NO_PAIN"].includes(el.name)) {
+                    defender[el.name] = Number(el.value);
+                }
+            }
+
+            const response = await fetch('http://localhost:8000/calc', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({attacker, defender})
+            });
+
+            const data = await response.json();
+            document.getElementById('result').textContent =
+                "Average Damage: " + (data.damage_result !== undefined ? data.damage_result.toFixed(2) : "ERROR");
+        };
+    </script>
+</body>
+</html>
