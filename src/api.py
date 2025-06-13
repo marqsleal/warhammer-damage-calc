@@ -12,11 +12,20 @@ Exemplo de uso:
     - Receba como resposta um dicionário com os resultados do cálculo (hit_result, wound_result, save_result, damage_result).
 """
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from warhammer_calc import WarHammerCalc # pylint: disable=import-error
 from json_validator import JsonValidator # pylint: disable=import-error
 
 app = FastAPI(title="Warhammer 40k Damage Calculator API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class AttackerModel(BaseModel):
     """
