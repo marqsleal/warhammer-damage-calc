@@ -52,17 +52,17 @@ class AttackerModel(BaseModel):
     ATTACK: int
     SKILL: int
     STRENGTH: int
-    ARMOR_PENETRATION: int
-    FLAT_DAMAGE: int
-    D3_DAMAGE: int
-    D6_DAMAGE: int
-    BLAST: int
-    HEAVY: int
-    LETHAL_HITS: int
-    SUSTAINED_HITS: int
-    TWIN_LINKED: int
-    REROLL_TO_HIT: int
-    REROLL_TO_WOUND: int
+    ARMOR_PENETRATION: int = 0
+    FLAT_DAMAGE: int = 0
+    D3_DAMAGE: int = 0
+    D6_DAMAGE: int = 0
+    BLAST: int = 0
+    HEAVY: int = 0
+    LETHAL_HITS: int = 0
+    SUSTAINED_HITS: int = 0
+    TWIN_LINKED: int = 0
+    REROLL_TO_HIT: int = 0
+    REROLL_TO_WOUND: int = 0
 
 class DefenderModel(BaseModel):
     """
@@ -80,8 +80,8 @@ class DefenderModel(BaseModel):
     TOUGHNESS: int
     ARMOR_SAVE: int
     N_MODELS: int
-    INVULNERABLE_SAVE: int
-    FEEL_NO_PAIN: int
+    INVULNERABLE_SAVE: int = 0
+    FEEL_NO_PAIN: int = 0
 
 class CalcRequest(BaseModel):
     """
