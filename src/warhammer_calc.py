@@ -72,7 +72,6 @@ class WarHammerCalc:
 
     def blast(
             self,
-            blast: int,
             n_models: int
     ) -> int:
         """
