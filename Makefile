@@ -47,10 +47,21 @@ api_docker_build:
 	docker build -f src/Dockerfile -t $(PROJECT_NAME)-api ./src/
 
 
+.PHONY: front_docker_build
+front_docker_build:
+	docker build -f front/Dockerfile -t $(PROJECT_NAME)-front ./front
+
+
 .PHONY: api_docker_run
 api_docker_run:
 	docker run -d -p 8000:8000 $(PROJECT_NAME)-api
 	echo "Access the API at: http://localhost:8000/docs"
+
+
+.PHONY: front_docker_run
+front_docker_run:
+	docker run -d -p 8080:8080 $(PROJECT_NAME)-front
+	echo "Access the front-end at: http://localhost:8080"
 
 
 .PHONY: run_test
