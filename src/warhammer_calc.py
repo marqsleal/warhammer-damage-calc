@@ -258,7 +258,6 @@ class WarHammerCalc:
         """
         attacks = self.attacker_kwargs["ATTACK"] + (
             self.blast(
-                self.attacker_kwargs["BLAST"],
                 self.defender_kwargs["N_MODELS"]
             ) if self.attacker_kwargs["BLAST"] > 0 else 0
         )
