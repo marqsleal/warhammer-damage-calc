@@ -51,3 +51,8 @@ api_docker_build:
 api_docker_run:
 	docker run -d -p 8000:8000 $(PROJECT_NAME)-api
 	echo "Access the API at: http://localhost:8000/docs"
+
+
+.PHONY: run_test
+run_test:
+	$(PYTHON_INTERPRETER) -m pytest --cov=src --cov-report=html
