@@ -244,7 +244,7 @@ class WarHammerCalc:
             float: Dano médio restante após aplicar Feel No Pain.
         """
         if feel_no_pain > 0:
-            result *= (1 - feel_no_pain / DICE_SIDES)
+            return result - (result * (DICE_MAX - feel_no_pain) / DICE_SIDES)
         return result
 
 
