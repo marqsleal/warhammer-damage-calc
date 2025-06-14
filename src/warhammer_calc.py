@@ -330,6 +330,8 @@ class WarHammerCalc:
             self: A própria instância, permitindo encadeamento de métodos.
         """
         save_roll = self.defender_kwargs["ARMOR_SAVE"] + self.attacker_kwargs["ARMOR_PENETRATION"]
+        if save_roll > 6:
+            save_roll = 6
         invulnerable_save = self.defender_kwargs["INVULNERABLE_SAVE"]
         final_save = invulnerable_save if invulnerable_save < save_roll else save_roll
         p_fail = 1 - self.roll_to_save(final_save)
