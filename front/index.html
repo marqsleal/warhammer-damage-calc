@@ -180,7 +180,7 @@
                 }
             }
 
-            const response = await fetch('http://localhost:8000/calc', {
+            const response = await fetch('http://api:8000/calc', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({attacker, defender})

@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./src
+      dockerfile: Dockerfile
+    container_name: warhammer-damage-calc-api
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - warhammer-network
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    container_name: warhammer-damage-calc-front
+    ports:
+      - "8080:8080"
+    depends_on:
+      - api
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - warhammer-network
+networks:
+  warhammer-network:
+    driver: bridge
