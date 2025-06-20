@@ -97,7 +97,7 @@ class CalcRequest(BaseModel):
     defender: DefenderModel
 
 @app.post("/calc")
-def calculate_damage(payload: CalcRequest):
+async def calculate_damage(payload: CalcRequest):
     """
     Endpoint da API responsável por calcular o dano médio esperado em um ataque de Warhammer 40k.
 

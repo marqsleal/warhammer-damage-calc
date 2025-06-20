@@ -1,9 +1,6 @@
-FROM python:3.12.3
+FROM nginx:1.25-alpine-slim
 
-WORKDIR /app
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY . /usr/share/nginx/html
 
-COPY . .
-
-EXPOSE 8080
-
-CMD ["python", "-m", "http.server", "8080"]
+EXPOSE 80

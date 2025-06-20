@@ -5,24 +5,20 @@ services:
     build:
       context: ./src
       dockerfile: Dockerfile
-    container_name: warhammer-damage-calc-api
+    container_name: warhammer-api
     ports:
       - "8000:8000"
-    environment:
-      - PYTHONUNBUFFERED=1
     networks:
       - warhammer-network
   front:
     build:
       context: ./front
       dockerfile: Dockerfile
-    container_name: warhammer-damage-calc-front
+    container_name: warhammer-front
     ports:
-      - "8080:8080"
+      - "8080:80"
     depends_on:
       - api
-    environment:
-      - PYTHONUNBUFFERED=1
     networks:
       - warhammer-network
 networks:

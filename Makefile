@@ -36,6 +36,11 @@ api_run:
 	echo "Access the API at: http://localhost:8000/docs"
 
 
+.PHONY: front_run 
+front_run:
+	$(PYTHON_INTERPRETER) -m http.server 8080 --directory front
+
+
 .PHONY: api_docker_requirements
 api_docker_requirements:
 	pipreqs src --force --savepath src/requirements.in
