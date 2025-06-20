@@ -146,7 +146,7 @@
                 <div class="form-group"><label for="REROLL_TO_HIT">Reroll To Hit (0 or 1):</label><input name="REROLL_TO_HIT" id="REROLL_TO_HIT" type="number" value="0" autocomplete="off"></div>
                 <div class="form-group"><label for="REROLL_TO_WOUND">Reroll To Wound (0 or 1):</label><input name="REROLL_TO_WOUND" id="REROLL_TO_WOUND" type="number" value="0" autocomplete="off"></div>
             </fieldset>
-        </form>
+        
         <div class="box">
             <fieldset>
                 <legend>Defender Unit</legend>
@@ -157,6 +157,7 @@
                 <div class="form-group"><label for="FEEL_NO_PAIN">Feel No Pain:</label><input name="FEEL_NO_PAIN" id="FEEL_NO_PAIN" type="number" value="0" autocomplete="off"></div>
                 <button type="submit">ROLL</button>
             </fieldset>
+        </form>
         </div>
         <div class="box">
             <h3>Result</h3>
@@ -165,9 +166,9 @@
     </div>
 
     <script>
-        document.getElementById('calc-form').onsubmit = async function(e) {
+        document.querySelector('button').onclick = async function(e) {
             e.preventDefault();
-            const form = e.target;
+            const form = document.getElementById('calc-form');
             const attacker = {};
             const defender = {};
 
@@ -179,6 +180,8 @@
                     defender[el.name] = Number(el.value);
                 }
             }
+
+            console.log("Payload enviado:", JSON.stringify({ attacker, defender }, null, 2));
 
             const response = await fetch('http://localhost:8000/calc', {
                 method: 'POST',
